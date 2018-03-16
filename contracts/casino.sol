@@ -33,6 +33,12 @@ contract Casino {
       return false;
     }
 
+    function resetData(){
+      players.length = 0; // Delete all the players array
+      totalBet = 0;
+      numberOfBets = 0;
+    }
+
     function distributePrizes(uint256 numberWinner) public {
       address[100] memory winners; // We have to create a temporary in memory array with fixed size
       uint256 count = 0; // This is the count for the array of winners
@@ -50,6 +56,7 @@ contract Casino {
           if(winners[j] != address(0)) // Check that the address in this fixed array is not empty
           winners[j].transfer(winnerEtherAmount);
         }
+      resetData();
      }
 
     function generateNumberWinner() public {
